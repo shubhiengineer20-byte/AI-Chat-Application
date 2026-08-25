@@ -1,0 +1,24 @@
+package com.chatapplication.ollama.config;
+
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class ChatClientConfig {
+
+    @Bean
+    public ChatClient chatClient(ChatClient.Builder chatClientBuilder){
+        return  chatClientBuilder
+                .defaultSystem("""
+                        You are an internal HR assistant. Your role is to help\s
+                        employees with questions related to HR policies such as\s
+                        leave policies, working hours, benefits and code of conduct.
+                        If a user asks for help with anything outside this,\s
+                        kindly inform that you can assist with queries related to\s
+                        HR policies.
+                        """)
+                .defaultUser("How can you help me ?")
+                .build();
+    }
+}
